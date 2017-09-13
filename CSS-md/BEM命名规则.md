@@ -3,8 +3,8 @@
 
 >In this CSS methodology a `block` is a top-level abstraction of a new component, for example a button: `.btn { }`. This block should be thought of as a parent. 
 Child items, or `elements`, can be placed inside and these are denoted by **two underscores** following the name of the block like `.btn__price { }`. 
-Finally, `modifiers` can manipulate the **block** so that we can theme or style that particular component without inflicting changes on a completely unrelated module. This is done by appending **two hyphens** to the name of the block just like `btn--orange`.
-
+Finally, `modifiers` can manipulate the **block** so that we can theme or style that particular component **without** inflicting changes on a completely unrelated module. This is done by appending **two hyphens** to the name of the block just like `btn--orange`.
+---
 ## BEM命名模式：
 ```css
 /* Block component */
@@ -17,11 +17,9 @@ Finally, `modifiers` can manipulate the **block** so that we can theme or style 
 .btn--orange {} 
 .btn--big {}
 ```
-
-
 ------
 
-**BEM 最多只有 B+E+M 三级**
+## BEM 最多只有B+E+M三级
 >The **Block**, **Element**, **Modifier** methodology (commonly referred to as **BEM**) is a popular **naming convention** for classes in HTML and CSS. 
 - Block
 - Element
@@ -61,23 +59,43 @@ EXample：
 
 ---
 
+
 ## 常用类名（class）关键字
-- 布局类：header, footer, container, main, content, aside, page, section
-- 包裹类：wrap, inner
-- 区块类：region, block, box
-- 结构类：hd, bd, ft, top, bottom, left, right, middle, col, row, grid, span
-- 列表类：list, item, field
-- 主次类：primary, secondary, sub, minor
-- 大小类：s, m, l, xl, large, small
-- 状态类：active, current, checked, hover, fail, success, warn, error, on, off
-- 导航类：nav, prev, next, breadcrumb, forward, back, indicator, paging, first, last
-- 交互类：tips, alert, modal, pop, panel, tabs, accordion, slide, scroll, overlay,
-- 星级类：rate, star
-- 分割类：group, seperate, divider
-- 等分类：full, half, third, quarter
-- 表格类：table, tr, td, cell, row
-- 图片类：img, thumbnail, original, album, gallery
-- 语言类：cn, en
-- 论坛类：forum, bbs, topic, post
-- 方向类：up, down, left, right
-- 其他语义类：btn, close, ok, cancel, switch; link, title, info, intro, more, icon; form, label, search, contact, phone, date, email, user; view, loading
+- 布局类：
+    - header, footer, container, main, content, aside, page, section
+- 包裹类：
+    - wrap, inner
+- 区块类：
+    - region, block, box
+- 结构类：
+    - hd, bd, ft, top, bottom, left, right, middle, col, row, grid, span
+- 列表类：
+    - list, item, field
+- 主次类：
+    - primary, secondary, sub, minor
+- 大小类：
+    - s, m, l, xl, large, small
+- 状态类：
+    - active, current, checked, hover, fail, success, warn, error, on, off
+- 导航类：
+    - nav, prev, next, breadcrumb, forward, back, indicator, paging, first, last
+- 交互类：
+    - tips, alert, modal, pop, panel, tabs, accordion, slide, scroll, overlay,
+- 星级类：
+    - rate, star
+- 分割类：
+    - group, seperate, divider
+- 等分类：
+    - full, half, third, quarter
+- 表格类：
+    - table, tr, td, cell, row
+- 图片类：
+    - img, thumbnail, original, album, gallery
+- 语言类：
+    - cn, en
+- 论坛类：
+    - forum, bbs, topic, post
+- 方向类：
+    - up, down, left, right
+- 其他语义类：
+    - btn, close, ok, cancel, switch; link, title, info, intro, more, icon; form, label, search, contact, phone, date, email, user; view, loading
