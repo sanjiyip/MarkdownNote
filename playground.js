@@ -1,3 +1,8 @@
-var text = "cat, bat, sat, fat";
-result = text.replace(/(at)/g, "word$2");//$1表示第一个捕获组
-console.log(result); 
+function Person() {
+}
+
+var person1 = new Person(); 
+var person2 = new Person();
+
+console.log(Object.getPrototypeOf(person1) === Person.prototpye);   //true
+console.log(Object.getPrototypeOf(person1).name); 
