@@ -1,45 +1,28 @@
-function Person() {
+function SuperType() {
+    this.property = true;
 }
 
-Person.prototype.name = "Nicholas";
-Person.prototype.age = "29";
-Person.prototype.job = "Software Engineer";
-Person.prototype.sayName = function() {
-    console.log(this.name);
+SuperType.prototype.getSuperValue = function() {
+    return this.property;
 };
 
-var person1 = new Person();
-var person2 = new Person();
-
-console.log(person1.hasOwnProperty("name"));
-console.log("name" in person1);
-
-person1.name = "Greg";
-console.log(person1.name);
-console.log(person1.hasOwnProperty("name"));
-console.log("name" in person1);
-
-console.log(person2.name);
-console.log(person2.hasOwnProperty("name"));
-console.log("name" in person2);
-
-delete person1.name;
-console.log(person1.name);
-console.log(person1.hasOwnProperty("name"));
-console.log("name" in person1);
-
-function hasOwnProperty(Object, name) {
-    return !object.hasOwnProperty(name) && (name in object);
+function SubType() {
+    this.subproperty = false;
 }
 
-var o = {
-    toString : function(){
-        return "My Object" ;
+
+
+//使用字面量添加新方法，会导致上一行代码无效
+SubType.prototype = {
+    getSubValue: function () {
+        return this.subproperty;
+    },
+    
+    someOtherMethod: function() {
+        return false;
     }
 };
-
-for(var prop in o) {
-    if (prop === "toString") {
-        console.log("Found toString");
-    }
-}
+//继承了SuperType（子类型定义的方法要在后面）
+SubType.prototype = new SuperType(); 
+var instance = new SubType();
+console.log(instance.getSuperValue());  //报错
