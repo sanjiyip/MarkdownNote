@@ -43,3 +43,51 @@ function createFunctions() {
     }
     return result;  //这里result是一个具有很多函数的数组
 } 
+// 
+function MyObject() {
+    
+    //私有变量和私有函数
+    var privateVariable = 10;
+
+    function privateFunction() {
+        return false;
+    }
+
+    //特权方法
+    this.publicMethod = function() {
+        privateVariable++;
+        return privateFunction();
+    };
+}
+
+var test = new MyObject();
+
+console.log(test.publicMethod());
+
+
+// 
+
+var value = 1;
+
+function bar() {
+    var value = 2;
+    (function(){
+        console.log(value);
+    })();
+}
+
+bar();
+
+
+var value = 1;
+
+function foo() {
+    console.log(value);
+}
+
+function bar() {
+    var value = 2;
+    foo();  //这个还是要依据function声明的作用域来
+}
+
+bar();
