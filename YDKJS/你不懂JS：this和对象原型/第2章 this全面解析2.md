@@ -216,4 +216,97 @@ o.foo();
 ```
 赋值表达式p.foo = o.foo 的返回值是目标函数的引用，因此调用位置是foo()而不是p.foo() 或者 o.foo()。
 
-----
+
+## 2.4.3 软绑定
+
+之前我们已经看过，硬绑定这种方式可以把this 强制绑定到指定的对象（除了使用new时），防止函数调用应用默认绑定规则。问题在于，硬绑定会大大降低函数的灵活性，使用硬绑定之后就无法使用隐式绑定或显式绑定来修改this。
+
+如果可以给默认绑定指定一个全局对象和undefined以外的值，那就可以实现和硬绑定相同的效果，同时保留隐式绑定后者显示绑定修改this的能力。
+
+可以通过一种被称为软绑定的方法来实现我们想要的效果：
+```js
+//软绑定
+if (!Function.prototype.softBind) {
+	Function.prototype.softBind = function(obj) {
+		var fn = this;
+		var	curried = [].slice.call( arguments, 1 );
+		var	bound = function bound() {
+				return fn.apply(
+					(!this ||
+						(typeof window !== "undefined" &&
+							this === window) ||
+						(typeof global !== "undefined" &&
+							this === global)
+					) ? obj : this,
+					curried.concat.apply( curried, arguments )
+				);
+			};
+		bound.prototype = Object.create( fn.prototype );
+		return bound;
+	};
+}
+```
+
+除了软绑定之外，softBind()的其他原来和ES5内置的bind()类似。
+
+
+# 2.5 this词法
+
+我们之前介绍的四条规则已经可以包含所有正常的函数。但是ES6中介绍了一种无法使用这些规则的特殊函数类型：箭头函数。
+
+箭头函数并不是使用function关键字定义的，而是**使用“胖箭头”的操作符 => 定义函数**的。箭头函数不使用this的四种标准规则，而是根据外层（函数或全局）作用域来决定this。
+
+来看看箭头函数的词法作用域：
+```js
+function foo() {
+    //返回一个箭头函数
+    return (a) => {
+        //this 继承自 foo()
+        console.log(this.a);
+    };
+}
+
+var obj1 = {
+    a: 2
+};
+
+var obj2 = {
+    a: 3
+};
+
+var bar = foo.call(obj1);
+bar.call(obj2); //是2，不是3！
+```
+foo()内部创建的箭头函数会捕获调用时foo()的this。由于foo()的this绑定到obj1，bar(引用箭头函数)的this也会绑定到obj1，箭头函数的绑定无法被修改。（new 也不行！）
+
+箭头函数最常用于回调函数中，例如事件处理器或者定时器：
+```js
+function foo() {
+    setTimeout(()=>{
+        //这里的this在此法上继承自foo()
+        console.log(this.a);
+    }, 100);
+}
+var obj = {
+    a: 2
+};
+foo.call(obj);  //2
+```
+
+箭头函数可以像bind()一样却帮函数的this被绑定到指定对象，此外，其重要性还体现在它用更常见的词法作用域取代传统的this机制。实际上，在ES6之前我们就已经在使用一种几乎和箭头函数完全一样的模式。
+```js
+function foo() {
+    var self = this;//lexcial capture of this
+    setTimeout(function(){
+        console.log(self.a);
+    }, 100);
+}
+
+var obj = {
+    a: 2
+};
+
+foo.call(obj);  //2
+```
+
+虽然self = this 和箭头函数看起来可以取代bind()，但本质上说没他们想替代的是this机制、
