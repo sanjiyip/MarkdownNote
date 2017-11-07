@@ -97,3 +97,22 @@ var obj = {
 
 
 
+var a = {x:1, y:2};
+function Foo(o) {
+    o.x = "changed";
+    o = [1, 2, 3];
+    o.y = "can I change?";
+}
+
+Foo(a);             // 将对象的引用地址的复本传递到函数的形参中
+
+console.log(a.x);   // "changed" 被改变了
+console.log(a.y);   // 2 对函数里面的形参重新赋值后,原对象(实参)不再受形参的影响
+
+var a = [1,2,3];
+var b = a;
+b.push(4);  //[1,2,3,4]
+a;
+b = ["a", "b", "c"];
+b.slice(1);
+a;
