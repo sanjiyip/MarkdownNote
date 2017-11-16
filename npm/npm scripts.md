@@ -16,7 +16,8 @@ npm 允许在`package.json`文件里面，使用`scripts`字段定义脚本命�
     "build:css": "npm run build:scss && npm run autoprefixer",
     "watch:css": "onchange 'src/scss/*.scss' -- npm run build:css",
     "watch:js": "onchange 'src/js/*.js' -- npm run build:js",
-    "watch": "npm-run-all --parallel watch:*"
+    "watch": "npm-run-all --parallel watch:*",
+    "build:webpack": "webpack"
   },
   
   "author": "yip",
@@ -71,6 +72,7 @@ $ node-sass -o dist/css src/scss
 - 第四步，在 package.json 文件里面的"scripts"添加你需要的脚本名和脚本，比如：
 ```json
   "scripts": {
+    "test": "mocha test",
     "build:scss": "node-sass -o dist/css src/scss",
   }
 ```
@@ -78,3 +80,59 @@ $ node-sass -o dist/css src/scss
 ```
 $ npm run build:scss
 ```
+
+### 3. npm 脚本的原理非常简单
+
+每当执行`npm run`，就会自动新建一个 Shell，在这个 Shell 里面执行指定的脚本命令。
+
+因此，只要是 Shell（一般是 Bash）可以运行的命令，就可以写在 npm 脚本里面。
+
+比较特别的是，npm run新建的这个 Shell，会将当前目录的`node_modules/.bin`子目录加入PATH变量，执行结束后，再将PATH变量恢复原样。
+
+这意味着，当前目录的node_modules/.bin子目录里面的所有脚本，都可以直接用脚本名调用，而不必加上路径。比如，当前项目的依赖里面有 Mocha，只要直接写mocha test就可以了。
+
+```json
+{
+  "script": {
+    "test": "mocha test"
+  }
+}
+```
+而不用写成：
+
+```json
+{
+  "script": {
+    "test": "test": "./node_modules/.bin/mocha test"
+  }
+}
+```
+
+最后，在控制台输入：`npm run test`，脚本就可以执行了。
+
+由于 npm 脚本的唯一要求就是可以在 Shell 执行，因此它不一定是 Node 脚本，任何可执行文件都可以写在里面。
+
+
+
+### 4. 使用模块`npm bin`的指令方法
+
+CLI（command-line interface，命令行界面）是指可在用户提示符下键入可执行指令的界面，它通常不支持鼠标，用户通过键盘输入指令，计算机接收到指令后，予以执行。 
+
+`babel-cli`工具自带一个babel-node命令
+
+Use the `npm bin` command to get the node modules /bin directory of your project
+
+```bash
+$ $(npm bin)/<binary-name> [args]
+```
+
+例如：
+
+```bash
+$ $(npm bin)/eslint --init
+```
+
+以后记住了：args 是参数
+
+不过前提是要安装了 eslint 这个模块，才能调用这个模块的bin（二进制）指令。
+
