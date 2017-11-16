@@ -134,4 +134,15 @@ var bar = bind(foo, obj);
 var b = bar(3);
 console.log(b);
 
-/******************************************/
+
+
+/**
+ * 
+ * 数组去从
+ * 
+ */
+
+var removeDuplicates = function (nums) {
+    return Array.from(new Set(nums));
+};
+
