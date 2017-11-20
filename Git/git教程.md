@@ -104,6 +104,53 @@ Git的版本库里存了很多东西，其中最重要的就是称为`stage`（�
 
 ---
 
+## .gitignore 文件（忽略特殊文件）
+
+在git中如果想忽略掉某个文件，不让这个文件提交到版本库中，可以使用修改根目录中 .gitignore 文件的方法（如无，则需自己手工建立此文件）。
+
+这个文件每一行保存了一个匹配的规则例如：
+```bash
+# 此为注释 – 将被 Git 忽略
+
+*.cs       # 忽略所有 .cs 结尾的文件
+!ABC.cs    # 但 ABC.cs 除外
+/BLL       # 仅仅忽略项目根目录下的 BLL 文件，不包括 subdir/BLL
+build/     # 忽略 build/ 目录下的所有文件
+doc/*.txt  # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
+```
+
+规则很简单，不做过多解释，但是有时候在项目开发过程中，突然心血来潮想把某些目录或文件加入忽略规则，按照上述方法定义后发现并未生效，原因是.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。
+
+那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交：
+
+```bash
+git rm -r --cached .
+git add .
+git commit -m 'update .gitignore'
+```
+
+### 如果觉得要忽略的内容太多懒得管理, 可以采取全部忽略逐一排除的策略
+
+先*忽略全部, 之后再!设定不被忽略的内容，比如：
+```bash
+*          # 忽略全部
+
+!/ch01/    # 不忽略的文件夹
+!/ch02/
+
+!*.c       # 不忽略的文件
+!*.h
+!*.cpp
+!*.md
+!*.txt
+```
+
+
+
+[.gitignore 自动生成网址](https://www.gitignore.io/)
+
+---
+
 
 ## 常见问题
 
@@ -128,3 +175,4 @@ Git的版本库里存了很多东西，其中最重要的就是称为`stage`（�
 [廖雪峰Git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 
 [Mac 终端命令大全](http://www.jianshu.com/p/3291de46f3ff)
+
