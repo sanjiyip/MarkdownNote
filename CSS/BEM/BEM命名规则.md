@@ -274,7 +274,7 @@ EXample：
 ```
 - COP(Component Oriented Programing) 組件導向編程，最近火熱的前端框架React和Angular2，都**強調使用Component當作網頁的最小獨立元件**，面向Component的思考可以更好維護各個細節、附帶整個專案都好維護、Component可以重複利用等好處。所以，就要使用BEM来使得写出来的CSS更易读，可维护。
 
-![](images/命名前缀.png)
+![](../images/命名前缀.png)
 ------
 
 ## 相关链接
