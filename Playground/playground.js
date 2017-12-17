@@ -1,27 +1,29 @@
-var removeDuplicates = function(nums) {
-    for(let i =0; i<nums.length; i++) {
-        if(nums[i]=== nums[i+1]) {
-            nums.splice(i,1);
-        }
-    }
-    return nums.length;
-};
+var div = document.querySelector('div');
+var classNames = div.classList.toggle('user');
 
-var arr = [2,3,1,1,2,4,5,4];
+var btn = document.querySelector('input');
+btn.addEventListener('click', function(){
+    btn.classList.toggle('active');
+});
+var head = document.head;
+console.log(head);
 
-removeDuplicates(arr);
+var charset = document.charset;
+console.log(charset);
 
-var array = [9,2,5,6,5,4,3,1];
+// var classNames = div.className.split(/\s+/);
 
-function insertionSort(array) {
-    for(var i = 0; i < array.length; i++) {
-        var temp = array[i];
-        var j = i -1;
-        while(j>=0 && array[j] > temp) {
-            array[j+1] = array[j];
-            j--;
-        }
-        array[j+1] = temp;
-    }
-}
-insertionSort(array);
+// var pos = -1,
+//     i,
+//     len;
+
+// for (i = 0, len=classNames.length; i < len; i++) {
+//     if(classNames[i] === 'user') {
+//         pos = i;
+//         break;
+//     }    
+// }
+
+// classNames.splice(i,1);
+
+// div.className = classNames.join(" ");   
