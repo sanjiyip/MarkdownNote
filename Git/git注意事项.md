@@ -25,4 +25,6 @@ Please make sure you have the correct access rightsand the repository exists.
 
 ---
 
-## 2. 
+## 2. 千万不要在根目录使用 git！！！
+
+解决办法：`rm -rf ~/.git`
