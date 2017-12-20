@@ -21,5 +21,8 @@ Please make sure you have the correct access rightsand the repository exists.
 
 ### 解决办法
 
-第一种情况的解决办法：重新配置git的ssh
+重新配置git的ssh
 
+---
+
+## 2. 
