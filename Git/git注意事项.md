@@ -1,30 +1,48 @@
 # git 常见问题
 
-## 1. ssh: connect to host github.com port 22: Operation timed out
+## 问题1
 
-### 症状：
-```bash
-git push origin master
-
-ssh: connect to host github.com port 22: Operation timed out 
-
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rightsand the repository exists.
+```
+ssh: connect to host github.com port 22: Operation timed out
 ```
 
-### 可能造成问题的原因：
+### 1.1 可能的原因及解决办法
 
-第一种可能情况： The reason could be the firewall modification as you are under a network.（防火墙原因）
+- 网络发生问题
 
-[ssh: connect to host github.com port 22: Connection timed out](https://stackoverflow.com/questions/15589682/ssh-connect-to-host-github-com-port-22-connection-timed-out)
-
-### 解决办法
-
-重新配置git的ssh
+- SSH 钥匙失效，重新设置
 
 ---
 
-## 2. 千万不要在根目录使用 git！！！
+## 问题2
 
-解决办法：`rm -rf ~/.git`
+```
+fatal: refusing to merge unrelated histories
+```
+
+导致无法 `git pull`
+
+### 2.1 可能的原因及解决办法
+
+假如我们的源是origin，分支是master，需要这样写来实现合并pull两个不同的项目
+```
+git pull origin master ----allow-unrelated-histories
+```
+
+---
+
+## 问题3
+
+在根目录上进行了 `git init`
+
+### 3.1 解决办法
+
+```
+$ rm -rf ~/.git
+```
+
+来删掉 .git 配置文件
+
+---
+
+## 问题4
