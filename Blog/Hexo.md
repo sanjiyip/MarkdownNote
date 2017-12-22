@@ -121,3 +121,30 @@ $ hexo d
 
 > d 即deploy
 
+## 6 绑定自己的域名
+
+### 6.1 在 Github Pages 仓库添加一个 CNAME 文件
+
+- 文件内只能包括一个顶级域名
+
+```
+example.com
+```
+
+> 使用用 hexo 框架搭建博客并部署到 Github Pages 上，可以将 CNAME 文件放在 source 文件夹内
+
+### 6.2 向你的 DNS 配置中添加 3 条记录
+
+```
+@          A             192.30.252.153
+@          A             192.30.252.154
+www      CNAME           username.github.io.
+```
+
+> 我使用的是 DNSPOD 的服务，具体 DNS 配置 google / 百度
+
+### 6.3 等候生效
+
+- 等十分钟左右，刷新浏览器，用你自己域名访问下试试
+
+## 
