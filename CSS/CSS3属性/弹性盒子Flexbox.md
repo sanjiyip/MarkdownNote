@@ -4,7 +4,8 @@
 
 在定义方面来说，弹性布局是指通过调整其内元素的宽高，从而在任何显示设备上实现对可用显示空间最佳填充的能力。弹性容器扩展其内元素来填充可用空间，或将其收缩来避免溢出。
 
-# 弹性盒布局相关词汇
+## 弹性盒布局相关词汇
+
 ![flexbox](images/flexbox.png)
 
 图中是一个 `flex-direction` 属性为 `row` 的 `flex container`，意味着其内的 `flex item` 将根据既定的模式沿主轴水平排列，其方向为元素的文本流方向，在这个例子里，为从左到右。
@@ -12,6 +13,7 @@
 ## 1. 弹性容器（flex container）/伸缩容器
 
 包含着 `flex item` 的父元素。通过设置 display 属性的值为 flex 或 inline-flex 来定义弹性容器。
+
 ```css
 .flex-container {
     display: flex;
@@ -57,9 +59,8 @@ float、clear和vertical-align在弹性项目上没有效果。
 
 `flex-wrap`主要用来定义弹性容器里是单行还是多行显示，侧轴的方向决定了新行堆放的方向。
 
-
 ```css
-flex-wrap: nowrap | wrap | wrap-reverse	
+flex-wrap: nowrap | wrap | wrap-reverse
 ```
 
 - `nowrap`(默认值)：弹性容器单行显示，“ltr”排版下，弹性项目从左到右排列；“rtl”排版上弹性项目从右向左排列。
@@ -79,7 +80,7 @@ flex-flow: <‘flex-direction’> || <‘flex-wrap’>
 ```
 
 ---
-# 弹性项目的对齐方式 
+## 弹性项目的对齐方式
 
 ## `justify-content` （容器上使用）
 
