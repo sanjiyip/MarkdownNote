@@ -7,6 +7,7 @@ Block命名应该清晰表达它是什么东西。
  >The block name describes its purpose ("What is it?" — menu or button), not its state ("What does it look like?" — red or big).
 
 **1.1 block组件的Class命名要语义化**
+
 ```html
 <!-- Correct. The `error` block is semantically meaningful -->
 <div class="error"></div>
