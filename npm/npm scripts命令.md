@@ -18,13 +18,13 @@ $ npm run test
 
 ## 管道式命令
 
-- 如果希望同时执行多个任务，可以借用 `Linux` 系统的 管道命令，将两个操作连在一起。
+* 如果希望同时执行多个任务，可以借用 `Linux` 系统的 管道命令，将两个操作连在一起。
 
-- 在 package.json 文件的 scripts 字段内的一个任务可以由多个子任务组成。
+* 在 package.json 文件的 scripts 字段内的一个任务可以由多个子任务组成。
 
 ### 管道（|）
 
-`|`：连接两个任务(CLI指令)
+`|`：连接两个任务(CLI 指令)
 
 ```json
 "build-js": "browserify browser/main.js | uglifyjs -mc > static/bundle.js"
@@ -50,7 +50,7 @@ $ npm run test
 
 如果是更复杂的脚本任务，我通常会写成`bash`文件，而在`package.json`中指定为脚本任务。
 
-- 下面是一个脚本实例，这个脚本做的事情是把编译好的资源加到一个发布分支，并且把这个分之推送到Heroku上。
+* 下面是一个脚本实例，这个脚本做的事情是把编译好的资源加到一个发布分支，并且把这个分之推送到 Heroku 上。
 
 ```bash
 #!/bin/bash
@@ -69,11 +69,10 @@ git checkout master # Checkout master again
 git stash pop # And restore the changes
 ```
 
-- 加上`package.json`的配置后，就可以通过`npm run deploy`命令执行这个脚本了。
+* 加上`package.json`的配置后，就可以通过`npm run deploy`命令执行这个脚本了。
 
 ```json
 "scripts": {
   "deploy": "./bin/deploy.sh"
 },
 ```
-
