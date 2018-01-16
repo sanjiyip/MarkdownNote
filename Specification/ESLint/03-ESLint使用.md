@@ -25,8 +25,7 @@ module.exports = {
   },
   rules: {
     strict: 0,
-    // 单引号
-    quotes: quotes: ["error", "single", { "allowTemplateLiterals": true }]
+    quotes: ["error", "single", { allowTemplateLiterals: true }]
   }
 };
 ```
