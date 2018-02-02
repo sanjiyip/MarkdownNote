@@ -31,9 +31,9 @@ These bits of **reusable code** are called **packages** or **modules**.
 
 npm is made up of three distinct pieces: (npm 由三部分组成)
 
-**找模块包**
+* **找模块包**
 
-* **the website**: the website serves as the primary tool for users to **discover packages**.
+- **the website**: the website serves as the primary tool for users to **discover packages**.
 
 **查看模块包信息**
 
@@ -73,7 +73,7 @@ npm 的包安装分为本地安装（local）、全局安装（global）两种�
 
   2. 可以通过 **require()** 来引入本地安装的包。
 
-- **全局安装**
+* **全局安装**
 
   * `npm install <module name> -g`
 
@@ -81,7 +81,7 @@ npm 的包安装分为本地安装（local）、全局安装（global）两种�
 
   2. 可以直接在**命令行**（也就是终端）里使用。
 
-- 举例：
+* 举例：
 
   * `npm install underscore` —— 本地安装
 
@@ -159,3 +159,9 @@ underscore.map();
 * [The Basics of Package.json in Node.js and npm](https://nodesource.com/blog/the-basics-of-package-json-in-node-js-and-npm?utm_source=nodeweekly&utm_medium=email)
 
 ---
+
+## --save-dev 与 --sav
+
+--save-dev 的包开发时的辅助工具（测试、打包工具都应该放在--save-dev）
+
+--save 则是上线要用到的包

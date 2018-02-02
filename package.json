@@ -1,0 +1,23 @@
+{
+  "name": "markdownnote",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjiyip/MarkdownNote.git"
+  },
+  "author": "yip",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sanjiyip/MarkdownNote/issues"
+  },
+  "homepage": "https://github.com/sanjiyip/MarkdownNote#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.15.0"
+  }
+}

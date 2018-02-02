@@ -25,19 +25,16 @@
 
 其次，上面代码一共用了三个库： react.js 、react-dom.js 和 Browser.js ，它们必须首先加载。
 
-- 其中，react.js 是 React 的核心库
-- react-dom.js 是提供与 DOM 相关的功能
-- Browser.js 的作用是将 JSX 语法转为 JavaScript 语法，这一步很消耗时间，实际上线的时候，应该将它放到服务器完成。
+* 其中，react.js 是 React 的核心库
+* react-dom.js 是提供与 DOM 相关的功能
+* Browser.js 的作用是将 JSX 语法转为 JavaScript 语法，这一步很消耗时间，实际上线的时候，应该将它放到服务器完成。
 
 ## ReactDOM.render()
 
 ReactDOM.render 是 React 的最基本方法，用于将模板转为 HTML 语言，并插入指定的 DOM 节点。
 
 ```jsx
-ReactDOM.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById('example')
-);
+ReactDOM.render(<h1>Hello, world!</h1>, document.getElementById("example"));
 ```
 
 ## JSX 语法
@@ -45,33 +42,28 @@ ReactDOM.render(
 **HTML 语言直接写在 JavaScript 语言之中，不加任何引号**，这就是 JSX 的语法。
 
 ```jsx
-var names = ['Alice', 'Emily', 'Kate'];
+var names = ["Alice", "Emily", "Kate"];
 ReactDOM.render(
   <div>
-  {
-    names.map(function(name){
-      return <div>hello, {name}!</div>
-    })
-  }
+    {names.map(function(name) {
+      return <div>hello, {name}!</div>;
+    })}
   </div>,
-  document.getElementById('example')
-)
+  document.getElementById("example")
+);
 ```
 
 上面代码体现了 JSX 的**基本语法规则**：
 
-- **遇到 HTML 标签（以 < 开头），就用 HTML 规则解析**；
-- **遇到代码块（以 { 开头），就用 JavaScript 规则解析**。
-- 在 ReactDOM.render 内，有点像对象写法，不能带分号，只能用逗号隔开
+* **遇到 HTML 标签（以 < 开头），就用 HTML 规则解析**；
+* **遇到代码块（以 { 开头），就用 JavaScript 规则解析**。
+* 在 ReactDOM.render 内，有点像对象写法，不能带分号，只能用逗号隔开
 
 JSX 允许直接在模板插入 JavaScript 变量。如果这个变量是一个数组，则会**展开这个数组的所有成员**。
 
 ```jsx
-let arr = [
-  <h1>Hello world!</h1>,
-  <h2>Hello React</h2>
-];
-ReactDOM.render(<div>{arr}</div>, document.getElementById('example'));
+let arr = [<h1>Hello world!</h1>, <h2>Hello React</h2>];
+ReactDOM.render(<div>{arr}</div>, document.getElementById("example"));
 ```
 
 ## 组件
@@ -89,19 +81,19 @@ var HelloMessage = React.createClass({
 
 ReactDOM.render(
   <HelloMessage name="John" />,
-  document.getElementById('example')
+  document.getElementById("example")
 );
 ```
 
 上面代码中，变量 HelloMessage 就是一个组件类。
 
-- 模板插入 `<HelloMessage/>` 时，会自动生成 HelloMessage 的一个实例（下文的"组件"都指组件类的实例）。
+* 模板插入 `<HelloMessage/>` 时，会自动生成 HelloMessage 的一个实例（下文的"组件"都指组件类的实例）。
 
-- **所有组件类都必须有自己的 render 方法**，用于输出组件。
+* **所有组件类都必须有自己的 render 方法**，用于输出组件。
 
-注意，**组件类的第一个字母必须大写**，否则会报错，比如HelloMessage不能写成helloMessage。
+注意，**组件类的第一个字母必须大写**，否则会报错，比如 HelloMessage 不能写成 helloMessage。
 
-另外，**组件类只能包含一个顶层标签**，否则也会报错。(就是最顶层标签不能超过1个)
+另外，**组件类只能包含一个顶层标签**，否则也会报错。(就是最顶层标签不能超过 1 个)
 
 ```jsx
 var HelloMessage = React.createClass({
@@ -115,7 +107,7 @@ var HelloMessage = React.createClass({
 });   //报错
 ```
 
-上面代码会报错，因为HelloMessage组件包含了两个顶层标签：h1和p。
+上面代码会报错，因为 HelloMessage 组件包含了两个顶层标签：h1 和 p。
 
 组件的属性可以在组件类的 `this.props` 对象上获取，比如这里的 name 属性就可以通过 this.props.name 读取。
 
@@ -130,11 +122,9 @@ var NotesList = React.createClass({
   render: function() {
     return (
       <ol>
-      {
-        React.Children.map(this.props.children, function (child) {
+        {React.Children.map(this.props.children, function(child) {
           return <li>{child}</li>;
-        })
-      }
+        })}
       </ol>
     );
   }
@@ -153,9 +143,9 @@ ReactDOM.render(
 
 ### this.props.children 的值有三种可能：
 
-- 如果当前组件没有子节点，它就是 undefined;
-- 如果有一个子节点，数据类型是 object ；
-- 如果有多个子节点，数据类型就是 array 。
+* 如果当前组件没有子节点，它就是 undefined;
+* 如果有一个子节点，数据类型是 object ；
+* 如果有多个子节点，数据类型就是 array 。
 
 所以，处理 this.props.children 的时候要小心。
 
@@ -172,16 +162,16 @@ React.Children 更多方法请查看官网。
 ```js
 var MyTitle = React.createClass({
   propTypes: {
-    title: React.PropTypes.string.isRequired,
+    title: React.PropTypes.string.isRequired
   },
 
   render: function() {
-     return <h1> {this.props.title} </h1>;
-   }
+    return <h1> {this.props.title} </h1>;
+  }
 });
 ```
 
-上面的Mytitle组件有一个title属性。PropTypes 告诉 React，这个 title 属性是必须的，而且它的值必须是字符串。现在，我们设置 title 属性的值是一个数值。title属性就通不过验证了。控制台会显示一行错误信息。
+上面的 Mytitle 组件有一个 title 属性。PropTypes 告诉 React，这个 title 属性是必须的，而且它的值必须是字符串。现在，我们设置 title 属性的值是一个数值。title 属性就通不过验证了。控制台会显示一行错误信息。
 
 ```jsx
 var data = 123;
@@ -191,30 +181,27 @@ var data = 123;
 
 ```jsx
 var MyTitle = React.createClass({
-  getDefaultProps : function () {
+  getDefaultProps: function() {
     return {
-      title : 'Hello World'
+      title: "Hello World"
     };
   },
 
   render: function() {
-     return <h1> {this.props.title} </h1>;
-   }
+    return <h1> {this.props.title} </h1>;
+  }
 });
 
-ReactDOM.render(
-  <MyTitle />,
-  document.body
-);
+ReactDOM.render(<MyTitle />, document.body);
 ```
 
 上面代码会输出"Hello World"。
 
-## 获取真实的DOM节点（refs 属性）
+## 获取真实的 DOM 节点（refs 属性）
 
 组件并不是真实的 DOM 节点，而是存在于内存之中的一种数据结构，叫做虚拟 DOM （virtual DOM）。
 
-只有当它插入文档以后，才会变成真实的 DOM 。根据 React 的设计，所有的 DOM 变动，都先在虚拟 DOM 上发生，然后再将实际发生变动的部分，反映在真实 DOM上，这种算法叫做 DOM diff ，它可以极大提高网页的性能表现。
+只有当它插入文档以后，才会变成真实的 DOM 。根据 React 的设计，所有的 DOM 变动，都先在虚拟 DOM 上发生，然后再将实际发生变动的部分，反映在真实 DOM 上，这种算法叫做 DOM diff ，它可以极大提高网页的性能表现。
 
 但是，有时需要**从组件获取真实 DOM 的节点用到 refs 属性**。
 
@@ -227,16 +214,17 @@ var MyComponent = React.createClass({
     return (
       <div>
         <input type="text" ref="myTextInput" />
-        <input type="button" value="Focus the text input" onClick={this.handleClick} />
+        <input
+          type="button"
+          value="Focus the text input"
+          onClick={this.handleClick}
+        />
       </div>
     );
   }
 });
 
-ReactDOM.render(
-  <MyComponent />,
-  document.getElementById('example')
-);
+ReactDOM.render(<MyComponent />, document.getElementById("example"));
 ```
 
 上面代码中，组件 MyComponent 的子节点有一个文本输入框，用于获取用户的输入。这时就必须获取真实的 DOM 节点，虚拟 DOM 是拿不到用户输入的。
@@ -254,25 +242,18 @@ ReactDOM.render(
 ```js
 var LikeButton = React.createClass({
   getInitialState: function() {
-    return {liked: false};
+    return { liked: false };
   },
   handleClick: function(event) {
-    this.setState({liked: !this.state.liked});
+    this.setState({ liked: !this.state.liked });
   },
   render: function() {
-    var text = this.state.liked ? 'like' : 'haven\'t liked';
-    return (
-      <p onClick={this.handleClick}>
-        You {text} this. Click to toggle.
-      </p>
-    );
+    var text = this.state.liked ? "like" : "haven't liked";
+    return <p onClick={this.handleClick}>You {text} this. Click to toggle.</p>;
   }
 });
 
-ReactDOM.render(
-  <LikeButton />,
-  document.getElementById('example')
-);
+ReactDOM.render(<LikeButton />, document.getElementById("example"));
 ```
 
 上面代码是一个 LikeButton 组件，它的 getInitialState 方法用于定义初始状态，也就是一个对象，这个对象可以通过 this.state 属性读取。
@@ -290,12 +271,12 @@ ReactDOM.render(
 ```jsx
 var Input = React.createClass({
   getInitialState: function() {
-    return {value: 'Hello!'};
+    return { value: "Hello!" };
   },
   handleChange: function(event) {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   },
-  render: function () {
+  render: function() {
     var value = this.state.value;
     return (
       <div>
@@ -306,95 +287,93 @@ var Input = React.createClass({
   }
 });
 
-ReactDOM.render(<Input/>, document.body);
+ReactDOM.render(<Input />, document.body);
 ```
 
-上面代码中，文本输入框的值，不能用 this.props.value 读取，而要定义一个 onChange 事件的回调函数，通过 event.target.value 读取用户输入的值。textarea 元素、select元素、radio元素都属于这种情况
+上面代码中，文本输入框的值，不能用 this.props.value 读取，而要定义一个 onChange 事件的回调函数，通过 event.target.value 读取用户输入的值。textarea 元素、select 元素、radio 元素都属于这种情况
 
 ## 组件的生命周期
 
 **组件的生命周期分成三个状态**：
 
-- Mounting：已插入真实 DOM
-- Updating：正在被重新渲染
-- Unmounting：已移出真实 DOM
+* Mounting：已插入真实 DOM
+* Updating：正在被重新渲染
+* Unmounting：已移出真实 DOM
 
 React 为**每个状态都提供了两种处理函数**：
 
-- `will 函数`在进入状态之前调用
-- `did 函数`在进入状态之后调用
+* `will 函数`在进入状态之前调用
+* `did 函数`在进入状态之后调用
 
 三种状态共计五种处理函数(Unmounting 状态 没有 did 函数)。
 
-- componentWillMount()
-- componentDidMount()
+* componentWillMount()
+* componentDidMount()
 
-- componentWillUpdate(object nextProps, object nextState)
-- componentDidUpdate(object prevProps, object prevState)
+* componentWillUpdate(object nextProps, object nextState)
+* componentDidUpdate(object prevProps, object prevState)
 
-- componentWillUnmount()
+* componentWillUnmount()
 
 此外，React 还提供两种特殊状态的处理函数。
 
-- componentWillReceiveProps(object nextProps)：已加载组件收到的新参数时调用
-- shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+* componentWillReceiveProps(object nextProps)：已加载组件收到的新参数时调用
+* shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
 
 ```jsx
 var Hello = React.createClass({
-  getInitialState: function () {
+  getInitialState: function() {
     return {
       opacity: 1.0
     };
   },
 
-  componentDidMount: function () {
-    this.timer = setInterval(function () {
-      var opacity = this.state.opacity;
-      opacity -= .05;
-      if (opacity < 0.1) {
-        opacity = 1.0;
-      }
-      this.setState({
-        opacity: opacity
-      });
-    }.bind(this), 100);
+  componentDidMount: function() {
+    this.timer = setInterval(
+      function() {
+        var opacity = this.state.opacity;
+        opacity -= 0.05;
+        if (opacity < 0.1) {
+          opacity = 1.0;
+        }
+        this.setState({
+          opacity: opacity
+        });
+      }.bind(this),
+      100
+    );
   },
 
-  render: function () {
+  render: function() {
     return (
-      <div style={{opacity: this.state.opacity}}>
-        Hello {this.props.name}
-      </div>
+      <div style={{ opacity: this.state.opacity }}>Hello {this.props.name}</div>
     );
   }
 });
 
-ReactDOM.render(
-  <Hello name="world"/>,
-  document.body
-);
+ReactDOM.render(<Hello name="world" />, document.body);
 ```
 
-上面代码在hello组件加载以后，通过 componentDidMount 方法设置一个定时器，每隔100毫秒，就重新设置组件的透明度，从而引发重新渲染。
+上面代码在 hello 组件加载以后，通过 componentDidMount 方法设置一个定时器，每隔 100 毫秒，就重新设置组件的透明度，从而引发重新渲染。
 
-### 组件的style属性的设置方式注意
+### 组件的 style 属性的设置方式注意
 
 不能写成：
 
 ```jsx
-<div style="opacity:{this.state.opacity};"></div>
+<div style="opacity:{this.state.opacity};" />
 ```
 
 而要写成
 
 ```jsx
-<div style={{opacity: this.state.opacity}}></div>
+<div style={{ opacity: this.state.opacity }} />
 ```
 
 因为 React 组件样式是一个对象，所以：
 
-- 第一重大括号表示这是 JavaScript 语法
-- 第二重大括号表示样式对象
+* 第一重大括号表示这是 JavaScript 语法
+* 第二重大括号表示样式对象
 
 ## Ajax
 
@@ -404,21 +383,24 @@ ReactDOM.render(
 var UserGist = React.createClass({
   getInitialState: function() {
     return {
-      username: '',
-      lastGistUrl: ''
+      username: "",
+      lastGistUrl: ""
     };
   },
 
   componentDidMount: function() {
-    $.get(this.props.source, function(result) {
-      var lastGist = result[0];
-      if (this.isMounted()) {
-        this.setState({
-          username: lastGist.owner.login,
-          lastGistUrl: lastGist.html_url
-        });
-      }
-    }.bind(this));
+    $.get(
+      this.props.source,
+      function(result) {
+        var lastGist = result[0];
+        if (this.isMounted()) {
+          this.setState({
+            username: lastGist.owner.login,
+            lastGistUrl: lastGist.html_url
+          });
+        }
+      }.bind(this)
+    );
   },
 
   render: function() {
@@ -437,4 +419,4 @@ ReactDOM.render(
 );
 ```
 
-上面代码使用 jQuery 完成 Ajax 请求，这是为了便于说明。React 本身没有任何依赖，完全可以不用jQuery，而使用其他库。
+上面代码使用 jQuery 完成 Ajax 请求，这是为了便于说明。React 本身没有任何依赖，完全可以不用 jQuery，而使用其他库。

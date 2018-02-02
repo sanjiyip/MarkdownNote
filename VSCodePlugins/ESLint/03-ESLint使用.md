@@ -5,7 +5,7 @@
 ### 1.本地安装 ESLint、React 插件、Babel 解析器
 
 ```bash
-npm i -D eslint eslint-plugin-react babel-eslint
+npm i -D eslint  babel-eslint eslint-plugin-react
 ```
 
 ### 2.创建 ESLint 配置文件（`.eslintrc.js`）
